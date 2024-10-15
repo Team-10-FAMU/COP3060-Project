@@ -79,8 +79,10 @@ Optional:
 
 ### 4. Schema
 User:
+
 Property	         Type	          Description 
-id                 long          Unique identifier for the user          
+
+id                 long          Unique identifier for the user   
 name               String        User's full name
 email              String        User's email (used for login)
 password           String        Hashed password for authentication
