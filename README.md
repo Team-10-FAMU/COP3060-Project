@@ -80,10 +80,10 @@ Optional:
 ### 4. Schema
 User:
 
-Property	         Type	          Description 
+Property	            Type	             Description 
 
-id                 long          Unique identifier for the user   
-name               String        User's full name
+id                     long              Unique identifier for the user   
+name                   String            User's full name
 email              String        User's email (used for login)
 password           String        Hashed password for authentication
 createdAt       LocalDateTime    Timestamp for account creation
