@@ -75,3 +75,82 @@ Optional:
 
 ### 3. WireFrames 
 ![Untitled Notebook-2](https://github.com/user-attachments/assets/06734728-0b2c-4fee-86fb-5ec78defc158)
+
+
+### 4. Schema
+User:
+Property	         Type	          Description 
+id                 long          Unique identifier for the user          
+name               String        User's full name
+email              String        User's email (used for login)
+password           String        Hashed password for authentication
+createdAt       LocalDateTime    Timestamp for account creation
+updatedAt       LocalDateTime    Timestamp for account updates
+
+
+Expense:
+Property	         Type	          Description 
+id                 long          Unique identifier for the user          
+amount             double        The amount spent          
+description        String        Description of the expense          
+date               LocalDate     Date the expense was made          
+category           category      Reference to the Category model         
+user               user          Reference to the Category model         
+createdAt          LocalDateTime  Timestamp for when the expense was added        
+updatedAt          LocalDateTime  Timestamp for any updates to the expense
+
+
+
+Category:
+Property	         Type	          Description 
+id                 long          Unique identifier for the user    
+name               String        Category name (e.g., "Food," "Travel")
+user               User          Optional reference to User for custom categories
+
+
+Profile:
+Property	         Type	          Description 
+id                 long          Unique identifier for the user 
+user               User          Optional reference to User for custom categories
+currency           String        Preferred currency (e.g., "USD")
+timeZone           String        User's time zone
+darkMode           Boolean       Whether dark mode is enabled
+    
+
+
+Budget Model (Optional):
+Property	         Type	          Description 
+id                 long          Unique identifier for the user 
+limit              BigDecimal    The maximum amount allowed for the budget
+startDate          LocalDate     Start date for the budget period
+endDate            LocalDate     End date for the budget period
+category           Category      Reference to the Category model (optional)
+user               User          Reference to the User model
+
+
+RecurringExpense Model (Optional):
+Property	         Type	          Description 
+id                 long        Unique identifier for the recurring expense
+amount             double      The amount of the recurring expense
+description        String      Description of the recurring expense
+startDate          LocalDate   Start date of the recurring expense
+frequency          Frequency   Enum: DAILY, WEEKLY, MONTHLY, YEARLY
+category           Category    Reference to the Category model (optional)
+user               User        Reference to the User model
+
+
+
+TransactionLog Model (Optional):
+Property	         Type	          Description 
+id                 long            Unique identifier for the log entry
+expense            Expense         Reference to the related expense
+user               User            Reference to the user who made the change
+action             String          Type of action: "ADD", "EDIT", "DELETE"
+timestamp          LocalDateTime   Timestamp for when the action occurred
+
+
+
+
+
+
+
