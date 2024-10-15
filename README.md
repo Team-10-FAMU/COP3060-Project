@@ -74,3 +74,4 @@ Optional:
 - Settings -> Toggle app settings (e.g., notifications, dark mode)
 
 ### 3. WireFrames 
+![Untitled Notebook-2](https://github.com/user-attachments/assets/06734728-0b2c-4fee-86fb-5ec78defc158)
