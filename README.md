@@ -4,7 +4,8 @@
 
 1. [overview](#overview)
 2. [Product Spec](#product-spec)
-3. [Wireframes](#wireframes)
+3. [Navigation](#navigation)
+4. [Wireframes](#wireframes)
 
 ## Overview 
 ### Description
@@ -71,3 +72,5 @@ Optional:
 - Add Expense -> Save expense and return to Dashboard
 - Profile -> Allows modification of user information
 - Settings -> Toggle app settings (e.g., notifications, dark mode)
+
+### 3. WireFrames 
