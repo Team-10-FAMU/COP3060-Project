@@ -90,6 +90,20 @@ createdAt       LocalDateTime    Timestamp for account creation
 updatedAt       LocalDateTime    Timestamp for account updates
 
 
+
+
+| Property | Type                        | Description                                           |
+|-----------|----------------------------------|-------------------------------------------------------|
+| id              |long                     |Unique identifier for the user                                      
+| name            |String                   |User's full name
+| email           |String                   | User's email (used for login)                                  
+| password        |String                   |Hashed password for authentication                             
+| createdAt       |LocalDateTime            | Timestamp for account creation
+| updatedAt       |LocalDateTime            | Timestamp for account updates                         
+
+
+
+
 Expense:
 Property	         Type	          Description 
 id                 long          Unique identifier for the user          
@@ -151,6 +165,187 @@ timestamp          LocalDateTime   Timestamp for when the action occurred
 
 
 
+
+### 5.Networking for Expense Tracker
+
+
+
+#### Base URL
+Let’s assume the base URL for your API is:
+```
+https://api.expensetrackerapp.com/v1
+```
+
+### **List of Network Requests by Screen**
+
+#### **Dashboard Screen**
+This screen shows the monthly spending summary, and the API will need to fetch all expenses for the current month.
+
+- **(Read/GET) Query all expenses for the current month**
+  ```java
+  // Endpoint: GET /expenses?month=currentMonth&year=currentYear
+  let queryURL = "\(baseURL)/expenses?month=\(currentMonth)&year=\(currentYear)"
+  URLSession.shared.dataTask(with: URL(string: queryURL)!) { (data, response, error) in
+      if let error = error {
+          print("Error fetching expenses: \(error)")
+      } else if let data = data {
+          // Parse and use the fetched data
+          let expenses = try? JSONDecoder().decode([Expense].self, from: data)
+          print("Successfully retrieved \(expenses?.count ?? 0) expenses for the month.")
+      }
+  }.resume()
+  ```
+
+#### **Add Expense Screen**
+When a user adds a new expense, the app will make a POST request to create the new expense.
+
+- **(Create/POST) Add a new expense**
+  ```java
+  // Endpoint: POST /expenses
+  let postURL = "\(baseURL)/expenses"
+  var request = URLRequest(url: URL(string: postURL)!)
+  request.httpMethod = "POST"
+  request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+  let newExpense = [
+      "amount": 45.50,
+      "description": "Grocery Shopping",
+      "category": "Food",
+      "date": "2024-10-08"
+  ]
+
+  request.httpBody = try? JSONSerialization.data(withJSONObject: newExpense)
+
+  URLSession.shared.dataTask(with: request) { (data, response, error) in
+      if let error = error {
+          print("Error adding expense: \(error)")
+      } else {
+          print("Expense added successfully.")
+      }
+  }.resume()
+  ```
+
+#### **Expense History Screen**
+This screen fetches a list of all expenses the user has entered.
+
+- **(Read/GET) Query all expenses**
+  ```java
+  // Endpoint: GET /expenses
+  let queryURL = "\(baseURL)/expenses"
+  URLSession.shared.dataTask(with: URL(string: queryURL)!) { (data, response, error) in
+      if let error = error {
+          print("Error fetching expenses: \(error)")
+      } else if let data = data {
+          // Parse and use the fetched data
+          let expenses = try? JSONDecoder().decode([Expense].self, from: data)
+          print("Successfully retrieved \(expenses?.count ?? 0) expenses.")
+      }
+  }.resume()
+  ```
+
+- **(Delete) Delete an expense**
+  ```java
+  // Endpoint: DELETE /expenses/:id
+  let expenseID = "12345" // Example ID of the expense to be deleted
+  let deleteURL = "\(baseURL)/expenses/\(expenseID)"
+  var request = URLRequest(url: URL(string: deleteURL)!)
+  request.httpMethod = "DELETE"
+
+  URLSession.shared.dataTask(with: request) { (data, response, error) in
+      if let error = error {
+          print("Error deleting expense: \(error)")
+      } else {
+          print("Expense deleted successfully.")
+      }
+  }.resume()
+  ```
+
+#### **Profile Settings Screen**
+The user profile data will be fetched and updated via GET and PUT requests.
+
+- **(Read/GET) Query user profile**
+  ```java
+  // Endpoint: GET /users/me
+  let queryURL = "\(baseURL)/users/me"
+  URLSession.shared.dataTask(with: URL(string: queryURL)!) { (data, response, error) in
+      if let error = error {
+          print("Error fetching user profile: \(error)")
+      } else if let data = data {
+          // Parse and use the fetched data
+          let profile = try? JSONDecoder().decode(UserProfile.self, from: data)
+          print("Successfully retrieved user profile.")
+      }
+  }.resume()
+  ```
+
+- **(Update/PUT) Update user profile**
+  ```java
+  // Endpoint: PUT /users/me
+  let updateURL = "\(baseURL)/users/me"
+  var request = URLRequest(url: URL(string: updateURL)!)
+  request.httpMethod = "PUT"
+  request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+  let updatedProfile = [
+      "name": "New Name",
+      "email": "newemail@example.com",
+      "currency": "USD",
+      "darkMode": true
+  ]
+
+  request.httpBody = try? JSONSerialization.data(withJSONObject: updatedProfile)
+
+  URLSession.shared.dataTask(with: request) { (data, response, error) in
+      if let error = error {
+          print("Error updating profile: \(error)")
+      } else {
+          print("Profile updated successfully.")
+      }
+  }.resume()
+  ```
+
+####  **Recurring Expenses Screen (Optional)**
+For managing recurring expenses, the app can create, read, update, and delete recurring transactions.
+
+- **(Create/POST) Create a new recurring expense**
+  ```java
+  // Endpoint: POST /recurring-expenses
+  let postURL = "\(baseURL)/recurring-expenses"
+  var request = URLRequest(url: URL(string: postURL)!)
+  request.httpMethod = "POST"
+  request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+  let newRecurringExpense = [
+      "amount": 1000.00,
+      "description": "Monthly Rent",
+      "category": "Housing",
+      "startDate": "2024-10-01",
+      "frequency": "MONTHLY"
+  ]
+
+  request.httpBody = try? JSONSerialization.data(withJSONObject: newRecurringExpense)
+
+  URLSession.shared.dataTask(with: request) { (data, response, error) in
+      if let error = error {
+          print("Error adding recurring expense: \(error)")
+      } else {
+          print("Recurring expense added successfully.")
+      }
+  }.resume()
+  ```
+
+### API Endpoints Summary:
+
+| HTTP Verb | Endpoint                        | Description                                           |
+|-----------|----------------------------------|-------------------------------------------------------|
+| GET       | /expenses                        | Get all expenses                                      |
+| GET       | /expenses?month=...&year=...     | Get expenses for a specific month                     |
+| POST      | /expenses                        | Create a new expense                                  |
+| DELETE    | /expenses/:id                    | Delete a specific expense                             |
+| GET       | /users/me                        | Get logged-in user profile                            |
+| PUT       | /users/me                        | Update user profile                                   |
+| POST      | /recurring-expenses              | Create a new recurring expense                        |
+| DELETE    | /recurring-expenses/:id          | Delete a specific recurring expense                   |
 
 
 
