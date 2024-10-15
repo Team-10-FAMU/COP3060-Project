@@ -79,19 +79,6 @@ Optional:
 
 ### 4. Schema
 User:
-
-Property	            Type	             Description 
-
-id                 long          Unique identifier for the user   
-name               String        User's full name
-email              String        User's email (used for login)
-password           String        Hashed password for authentication
-createdAt       LocalDateTime    Timestamp for account creation
-updatedAt       LocalDateTime    Timestamp for account updates
-
-
-
-
 | Property | Type                        | Description                                           |
 |-----------|----------------------------------|-------------------------------------------------------|
 | id              |long                     |Unique identifier for the user                                      
@@ -101,19 +88,17 @@ updatedAt       LocalDateTime    Timestamp for account updates
 | createdAt       |LocalDateTime            | Timestamp for account creation
 | updatedAt       |LocalDateTime            | Timestamp for account updates                         
 
-
-
-
 Expense:
-Property	         Type	          Description 
-id                 long          Unique identifier for the user          
-amount             double        The amount spent          
-description        String        Description of the expense          
-date               LocalDate     Date the expense was made          
-category           category      Reference to the Category model         
-user               user          Reference to the Category model         
-createdAt          LocalDateTime  Timestamp for when the expense was added        
-updatedAt          LocalDateTime  Timestamp for any updates to the expense
+| Property | Type                        | Description                                           |
+|-----------|----------------------------------|-------------------------------------------------------|
+| id                | long            |Unique identifier for the user          
+|amount             |double           |The amount spent          
+|description        |String           |Description of the expense          
+|date               |LocalDate        |Date the expense was made          
+|category           |category         |Reference to the Category model         
+|user               |user             |Reference to the Category model         
+|createdAt          |LocalDateTime    | Timestamp for when the expense was added        
+updatedAt           |LocalDateTime    | Timestamp for any updates to the expense
 
 
 Category:
@@ -121,6 +106,13 @@ Property	         Type	          Description
 id                 long          Unique identifier for the user    
 name               String        Category name (e.g., "Food," "Travel")
 user               User          Optional reference to User for custom categories
+
+| Property | Type                        | Description                                           |
+|-----------|----------------------------------|-------------------------------------------------------|
+| id                | long            |Unique identifier for the user          
+|name               | String          |Category name (e.g., "Food," "Travel")
+|user               | User            |Optional reference to User for custom categories
+
 
 
 Profile:
