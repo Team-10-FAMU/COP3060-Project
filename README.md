@@ -132,16 +132,6 @@ Budget Model (Optional):
 
 
 RecurringExpense Model (Optional):
-Property	         Type	          Description 
-id                 long        Unique identifier for the recurring expense
-amount             double      The amount of the recurring expense
-description        String      Description of the recurring expense
-startDate          LocalDate   Start date of the recurring expense
-frequency          Frequency   Enum: DAILY, WEEKLY, MONTHLY, YEARLY
-category           Category    Reference to the Category model (optional)
-user               User        Reference to the User model
-
-
 | Property         | Type                        | Description                                           |
 |------------------|------------------|-------------------------------------------------------|
 | id               | long            | Unique identifier for the recurring expense
@@ -154,22 +144,20 @@ user               User        Reference to the User model
 
 
 TransactionLog Model (Optional):
-Property	         Type	          Description 
-id                 long            Unique identifier for the log entry
-expense            Expense         Reference to the related expense
-user               User            Reference to the user who made the change
-action             String          Type of action: "ADD", "EDIT", "DELETE"
-timestamp          LocalDateTime   Timestamp for when the action occurred
-
-
+| Property         | Type                        | Description                                           |
+|------------------|------------------|-------------------------------------------------------|
+|id                 |long            |Unique identifier for the log entry
+|expense            |Expense         |Reference to the related expense
+|user               |User            |Reference to the user who made the change
+|action             |String          |Type of action: "ADD", "EDIT", "DELETE"
+|timestamp          |LocalDateTime   |Timestamp for when the action occurred
 
 
 ### 5.Networking for Expense Tracker
 
 
-
 #### Base URL
-Let’s assume the base URL for your API is:
+Let’s assume the base URL for the API is:
 ```
 https://api.expensetrackerapp.com/v1
 ```
