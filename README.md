@@ -102,13 +102,8 @@ updatedAt           |LocalDateTime    | Timestamp for any updates to the expense
 
 
 Category:
-Property	         Type	          Description 
-id                 long          Unique identifier for the user    
-name               String        Category name (e.g., "Food," "Travel")
-user               User          Optional reference to User for custom categories
-
-| Property | Type                        | Description                                           |
-|-----------|----------------------------------|-------------------------------------------------------|
+| Property         | Type                        | Description                                           |
+|------------------|------------------|-------------------------------------------------------|
 | id                | long            |Unique identifier for the user          
 |name               | String          |Category name (e.g., "Food," "Travel")
 |user               | User            |Optional reference to User for custom categories
@@ -116,23 +111,24 @@ user               User          Optional reference to User for custom categorie
 
 
 Profile:
-Property	         Type	          Description 
-id                 long          Unique identifier for the user 
-user               User          Optional reference to User for custom categories
-currency           String        Preferred currency (e.g., "USD")
-timeZone           String        User's time zone
-darkMode           Boolean       Whether dark mode is enabled
-    
+| Property         | Type                        | Description                                           |
+|------------------|------------------|-------------------------------------------------------|
+| id               | long                          |Unique identifier for the user          
+|user              | User                          |Optional reference to User for custom categories
+|currency          | String                        |Preferred currency (e.g., "USD")
+|timeZone          | String                        |User's time zone
+|darkMode          | Boolean                       |Whether dark mode is enabled
 
 
 Budget Model (Optional):
-Property	         Type	          Description 
-id                 long          Unique identifier for the user 
-limit              BigDecimal    The maximum amount allowed for the budget
-startDate          LocalDate     Start date for the budget period
-endDate            LocalDate     End date for the budget period
-category           Category      Reference to the Category model (optional)
-user               User          Reference to the User model
+| Property         | Type                        | Description                                           |
+|------------------|------------------|-------------------------------------------------------|
+| id               | long                  |Unique identifier for the user          
+|limit             | double                |The maximum amount allowed for the budget
+|startDate         | LocalDate             |Start date for the budget period
+|endDate           | LocalDate             |End date for the budget period
+|category          | Category              |Reference to the Category model (optional)
+|user              | User                  |Reference to the User model
 
 
 RecurringExpense Model (Optional):
@@ -145,6 +141,16 @@ frequency          Frequency   Enum: DAILY, WEEKLY, MONTHLY, YEARLY
 category           Category    Reference to the Category model (optional)
 user               User        Reference to the User model
 
+
+| Property         | Type                        | Description                                           |
+|------------------|------------------|-------------------------------------------------------|
+| id               | long            | Unique identifier for the recurring expense
+|amount            | double          | The amount of the recurring expense
+|description       | String          | Description of the recurring expense
+|startDate         | LocalDate       |Start date of the recurring expense
+|frequency         | Frequency       |Enum: DAILY, WEEKLY, MONTHLY, YEARLY
+|category          | Category        |Reference to the Category model (optional)
+|user              | User            |Reference to the User model
 
 
 TransactionLog Model (Optional):
