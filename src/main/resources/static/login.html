@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<nav>
+    <ul class="navbar">
+        <li><a href="signup.html">Sign Up</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="expense.html">Add Expense</a></li>
+        <li><a href="budget.html">Budget</a></li>
+        <li><a href="history.html">Expense History</a></li>
+        <li><a href="settings.html">Settings</a></li>
+    </ul>
+</nav>
+<section id="auth-screen">
+    <div class="auth-container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <label>Email:<input type="email" placeholder="Email" name="email" required></label>
+            <label>Password: <input type="password" placeholder="Password" name="password" required></label>
+            <button type="submit">Login</button>
+            <p class="form-footer">
+                Don't have an account? <a href="signup.html">Sign up here</a>
+            </p>
+        </form>
+    </div>
+</section>
+
+<script>
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Login form submitted!');
+        // Add logic to authenticate user
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Expense</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<nav>
+  <ul class="navbar">
+    <li><a href="signup.html">Sign Up</a></li>
+    <li><a href="login.html">Login</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="expense.html">Add Expense</a></li>
+    <li><a href="budget.html">Budget</a></li>
+    <li><a href="history.html">Expense History</a></li>
+    <li><a href="settings.html">Settings</a></li>
+  </ul>
+</nav>
+
+<section id="add-expense-screen">
+  <h2>Add New Expense</h2>
+  <form id="add-expense-form">
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" name="amount" placeholder="Amount" required>
+
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" placeholder="Description" required>
+
+    <label for="category-select">Category:</label>
+    <select id="category-select" name="category" required>
+      <option value="" disabled selected>Select Category</option>
+      <option value="food">Food</option>
+      <option value="rent">Rent</option>
+      <option value="school">School</option>
+      <option value="bills">Bills</option>
+      <option value="home-appliance">Home Appliance</option>
+      <option value="entertainment">Entertainment</option>
+      <option value="personal-travel">Personal Travel</option>
+    </select>
+
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" required>
+
+    <label for="details">Details:</label>
+    <textarea id="details" name="details" placeholder="Add any other details"></textarea>
+
+    <button type="submit">Save Expense</button>
+  </form>
+
+  <div id="confirmation-message" class="hidden">Expense Added Successfully!</div>
+</section>
+
+<script>
+  const transactionHistory = JSON.parse(localStorage.getItem('transactionHistory')) || [];
+
+  document.getElementById('add-expense-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const amount = e.target.amount.value;
+    const description = e.target.description.value;
+    const category = e.target.category.value;
+    const date = e.target.date.value;
+    const details = e.target.details.value;
+
+    if (amount && description && category && date) {
+      const newTransaction = {
+        amount: parseFloat(amount).toFixed(2),
+        description,
+        category,
+        date,
+        details
+      };
+
+      transactionHistory.push(newTransaction);
+      localStorage.setItem('transactionHistory', JSON.stringify(transactionHistory));
+
+      e.target.reset();
+      const confirmation = document.getElementById('confirmation-message');
+      confirmation.classList.remove('hidden');
+      setTimeout(() => {
+        confirmation.classList.add('hidden');
+      }, 3000);
+    } else {
+      alert('Please fill in all required fields.');
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+
+<nav>
+  <ul class="navbar">
+    <li><a href="signup.html">Sign Up</a></li>
+    <li><a href="login.html">Login</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="expense.html">Add Expense</a></li>
+    <li><a href="budget.html">Budget</a></li>
+    <li><a href="history.html">Expense History</a></li>
+    <li><a href="settings.html">Settings</a></li>
+  </ul>
+</nav>
+
+<div id="dashboard">
+  <section class="dashboard-container">
+    <div class="welcome-section">
+      <img src="/static/greeting.jpg" alt="Greeting" class="greeting-img">
+      <h2>Welcome, User!</h2>
+      <p>Your personalized dashboard to manage your finances effectively.</p>
+    </div>
+
+    <div class="dashboard-content">
+      <div class="dashboard-item">
+        <h3>Quick Actions</h3>
+        <ul class="action-list">
+          <li><a href="expense.html"><i class="fas fa-plus-circle"></i> Add New Expense</a></li>
+          <li><a href="history.html"><i class="fas fa-history"></i> View Expense History</a></li>
+          <li><a href="settings.html"><i class="fas fa-cogs"></i> Update Settings</a></li>
+        </ul>
+      </div>
+
+      <div class="dashboard-item">
+        <h3>Account Overview</h3>
+        <p><strong>Current Balance:</strong> <span id="current-balance">$3,500.00</span></p>
+        <p><strong>Total Expenses This Month:</strong> <span id="total-expenses">$1,200.00</span></p>
+        <p><strong>Upcoming Bills:</strong> <span id="upcoming-bills">$450.00 (due in 5 days)</span></p>
+      </div>
+    </div>
+
+    <div class="notification-section">
+      <h3>Recent Notifications</h3>
+      <ul id="notification-list">
+        <li><i class="fas fa-bell"></i> You have an upcoming bill due in 5 days.</li>
+        <li><i class="fas fa-bell"></i> Your expense report for the last month is ready to review.</li>
+        <li><i class="fas fa-bell"></i> New settings have been applied.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<div id="dark-mode-toggle">
+  <label for="dark-mode">Dark Mode</label>
+  <input type="checkbox" id="dark-mode">
+</div>
+
+<script>
+  // Toggle Dark Mode
+  document.getElementById('dark-mode').addEventListener('change', function () {
+    document.body.classList.toggle('dark-mode', this.checked);
+  });
+
+  // Simulated data fetching and display for the dashboard (replace with real data if needed)
+  document.addEventListener('DOMContentLoaded', function () {
+    const currentBalance = document.getElementById('current-balance');
+    const totalExpenses = document.getElementById('total-expenses');
+    const upcomingBills = document.getElementById('upcoming-bills');
+
+    // Fetch data from local storage or an API (simulated here)
+    const userDashboardData = JSON.parse(localStorage.getItem('userDashboardData')) || {
+      balance: 3500.00,
+      expenses: 1200.00,
+      bills: 450.00
+    };
+
+    currentBalance.textContent = `$${userDashboardData.balance.toFixed(2)}`;
+    totalExpenses.textContent = `$${userDashboardData.expenses.toFixed(2)}`;
+    upcomingBills.textContent = `$${userDashboardData.bills.toFixed(2)} (due in 5 days)`;
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<nav>
+    <ul class="navbar">
+        <li><a href="signup.html">Sign Up</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="expense.html">Add Expense</a></li>
+        <li><a href="budget.html">Budget</a></li>
+        <li><a href="history.html">Expense History</a></li>
+        <li><a href="settings.html">Settings</a></li>
+    </ul>
+</nav>
+
+<section id="budget-screen">
+    <h2>Set Your Budget Goals</h2>
+    <form id="budget-form">
+        <label for="budget-name">Budget Name:</label>
+        <input type="text" id="budget-name" name="budget-name" placeholder="e.g., Monthly Budget" required>
+
+        <label for="budget-limit">Budget Limit ($):</label>
+        <input type="number" id="budget-limit" name="budget-limit" placeholder="Enter your budget limit" required>
+
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" name="start-date" required>
+
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date" name="end-date" required>
+
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+            <option value="food">Food</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="transportation">Transportation</option>
+            <option value="utilities">Utilities</option>
+            <option value="other">Other</option>
+        </select>
+
+        <div class="button-group">
+            <button type="submit">Set Budget</button>
+        </div>
+    </form>
+    <div id="confirmation-message" class="hidden">Budget Goal Created Successfully!</div>
+</section>
+
+<script>
+    document.getElementById('budget-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const confirmation = document.getElementById('confirmation-message');
+        confirmation.classList.remove('hidden');
+        setTimeout(() => {
+            confirmation.classList.add('hidden');
+        }, 3000);
+        // Logic to save data to localStorage or a database goes here
+    });
+</script>
+</body>
+</html>
