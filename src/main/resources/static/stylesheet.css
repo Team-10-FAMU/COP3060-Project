@@ -315,3 +315,22 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #218838;
 }
+
+/* Profile Picture Preview */
+.profile-preview {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 5px;
+    border: 2px solid #ddd;
+    border-radius: 50%; /* Creates a circle */
+    overflow: hidden;
+    width: 150px; /* Set a fixed width */
+    height: 150px; /* Set a fixed height */
+}
+
+.profile-preview img {
+    width: 100%; /* Ensures image takes up the full container */
+    height: 100%; /* Ensures image takes up the full container */
+    object-fit: cover; /* Ensures image aspect ratio is maintained */
+}

@@ -26,6 +26,12 @@
             <input type="file" id="profile-picture" name="profile-picture" accept="image/*">
         </div>
 
+        <div class="form-group profile-preview hidden" id="profile-preview">
+
+            <img src="/static/user.jpg" alt="User" class="greeting-img">
+
+        </div>
+
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" maxlength="100" required>
@@ -70,6 +76,23 @@
 </section>
 
 <script>
+    document.getElementById('profile-picture').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        const preview = document.getElementById('preview-image');
+        const previewContainer = document.getElementById('profile-preview');
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                preview.src = event.target.result;
+                previewContainer.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewContainer.classList.add('hidden');
+        }
+    });
+
     document.getElementById('dark-mode-switch').addEventListener('change', (e) => {
         const isEnabled = e.target.checked;
         localStorage.setItem('darkMode', isEnabled);
@@ -93,7 +116,6 @@
         setTimeout(() => {
             confirmation.classList.add('hidden');
         }, 3000);
-        // Logic to save data to localStorage or a database goes here
     });
 
     document.getElementById('discard-button').addEventListener('click', () => {
